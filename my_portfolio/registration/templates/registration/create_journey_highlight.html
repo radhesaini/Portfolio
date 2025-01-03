@@ -1,0 +1,14 @@
+# create_journey_highlight.html {% extends 'base.html' %} {% block content %}
+<h1>Create Journey Highlight</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Create</button>
+</form>
+{% endblock %} # update_journey_highlight.html {% extends 'base.html' %} {%
+block content %}
+<h1>Update Journey Highlight</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Update</button>
+</form>
+{% endblock %}

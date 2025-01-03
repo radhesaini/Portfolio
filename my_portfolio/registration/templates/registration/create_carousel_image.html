@@ -1,0 +1,13 @@
+# home/create_home_page.html {% block content %} {% if pk %}
+<h1>Update Carousel Image</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Update</button>
+</form>
+{% else %}
+<h1>Create Carousel Image</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Create</button>
+</form>
+{% endif %} {% endblock %}

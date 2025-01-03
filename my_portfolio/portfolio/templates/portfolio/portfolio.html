@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 2rem;
+      }
+
+      .project {
+        border: 1px solid #ddd;
+        padding: 1rem;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .project img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+      }
+
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>{% include 'registration/navigation.html' %}</header>
+
+    <div class="container">
+      <div class="section-title">
+        <h2>Projects</h2>
+      </div>
+      <div class="projects">
+        {% for project in projects %}
+        <div class="project">
+          <h3>{{ project.title }}</h3>
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+          <p>{{ project.description }}</p>
+          <p>Technologies: {{ project.technologies }}</p>
+          <a href="{{ project.url }}" target="_blank">View Project</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% include 'registration/footer.html' %}
+  </body>
+</html>

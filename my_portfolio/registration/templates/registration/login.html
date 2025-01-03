@@ -1,0 +1,10 @@
+{% extends "admin/login.html" %} {% block content %}
+<div class="container">
+  <h2>login</h2>
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't Have an account? <a href="{% url 'registration' %}">Register</a></p>
+</div>
+{% endblock %}

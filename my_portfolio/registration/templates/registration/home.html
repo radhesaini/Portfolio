@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <style>
+    /* style.css */
+    body {
+      font-family: "Open Sans", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      overflow-x: hidden;
+    }
+
+    #carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    #carousel img {
+      width: 100%;
+      height: auto;
+      /* position: absolute;
+      top: 0;
+      left: 0; */
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #carousel img.active {
+      opacity: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 1rem 0;
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .journey {
+      text-align: center;
+      padding: 4rem 0;
+    }
+
+    .highlight-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .highlight {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 250px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .highlight:hover {
+      transform: translateY(-5px);
+    }
+
+    .highlight i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+  </style>
+  <body>
+    {% include 'registration/navigation.html' %}
+    <header>
+      <div id="carousel">
+        {% for image in carousel_images %}
+        <img src="{{ image.image.url }}" alt="Carousel Image" />
+        {% endfor %}
+      </div>
+      <h1>{{ home_page.heading }}</h1>
+      <h2>{{ home_page.subheading }}</h2>
+    </header>
+    <section class="journey">
+      {% block content %} {% if user.is_authenticated %}
+      <p>You are logged in as: {{ user.username }}</p>
+      {% else %}
+      <p>You are not logged in.</p>
+      <a href="{% url 'login' %}">Login</a> |
+      <a href="{% url 'registration' %}">Signup</a>
+      {% endif %} {% endblock %}
+      <h2>Journey Highlights</h2>
+      <div class="highlight-container">
+        {% for highlight in highlights %}
+        <div class="highlight">
+          <i class="fas fa-{{ highlight.icon }}"></i>
+          <h3>{{ highlight.title }}</h3>
+          <p>{{ highlight.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% include 'registration/footer.html' %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      // carousel.js
+      $(document).ready(function () {
+        var carouselImages = $("#carousel img");
+        var currentIndex = 0;
+
+        function showImage(index) {
+          carouselImages.hide();
+          carouselImages.eq(index).show();
+          carouselImages.eq(index).addClass("active");
+        }
+
+        showImage(currentIndex);
+
+        setInterval(function () {
+          currentIndex = (currentIndex + 1) % carouselImages.length;
+          showImage(currentIndex);
+          carouselImages.eq(currentIndex - 1).removeClass("active");
+          carouselImages.eq(currentIndex - 1).hide();
+        }, 500); // Change image every 3 seconds
+        // setInterval(function () {
+        //   currentIndex = (currentIndex - 1) % carouselImages.length;
+        //   carouselImages.eq(currentIndex).removeClass("active");
+        // }, 500); // Change image every 3 seconds
+      });
+    </script>
+  </body>
+</html>

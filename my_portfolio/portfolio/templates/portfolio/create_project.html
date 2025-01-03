@@ -1,0 +1,5 @@
+<h1>Create New Project</h1>
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Create Project</button>
+</form>

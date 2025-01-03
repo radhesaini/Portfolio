@@ -1,0 +1,48 @@
+<style>
+  nav {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    display: inline-block;
+    margin: 0 1rem;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+  }
+  nav li:nth-child(1) {
+    float: left;
+  }
+
+  nav li:nth-child(7),
+  nav li:nth-child(6) {
+    float: right;
+  }
+</style>
+<nav>
+  <ul>
+    <li>Radhe</li>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="{% url 'portfolio' %}">Projects</a></li>
+    <li><a href="#">Contact</a></li>
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+    <li><a href="#">{{user.username}}</a></li>
+    {% else %}
+    <li><a href="{% url 'login' %}">Login</a></li>
+    <li><a href="{% url 'registration' %}">Register</a></li>
+    {% endif %}
+  </ul>
+</nav>
